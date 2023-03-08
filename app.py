@@ -26,6 +26,10 @@ def index():
 from member import member_bp
 app.register_blueprint(member_bp)
 
+
+from author import author_bp
+app.register_blueprint(author_bp)
+
 # @app.route('/member')
 # def member():
 #     cur=mysql.connection.cursor()

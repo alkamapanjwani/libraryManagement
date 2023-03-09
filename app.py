@@ -30,6 +30,10 @@ app.register_blueprint(member_bp)
 from author import author_bp
 app.register_blueprint(author_bp)
 
+from book import book_bp
+app.register_blueprint(book_bp)
+
+
 # @app.route('/member')
 # def member():
 #     cur=mysql.connection.cursor()

@@ -5,12 +5,13 @@
 
    <link rel="shortcut icon" href="{{url_for('static',filename='library.png')}}">
 
-   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   
 
-   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -39,8 +40,8 @@
  
          <li><a href="{{ url_for('member_bp.member') }}">Member</a></li>
          <li><a href="{{ url_for('author_bp.author') }}">Author</a></li>
-         <li><a href="{{ url_for('index') }}">Book</a></li>         
-         <li><a href="{{ url_for('index') }}">Issue/ Return Book</a></li>
+         <li><a href="{{ url_for('book_bp.book') }}">Book</a></li>         
+         <li><a href="{{ url_for('book_bp.insert_book') }}">Issue/ Return Book</a></li>
          <li><a href="{{ url_for('index') }}">Transaction</a></li>
        </ul>
      </div>

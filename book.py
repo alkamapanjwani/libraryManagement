@@ -25,62 +25,78 @@ def book():
         print(error)
         return render_template('error_occured.html')
 
-@book_bp.route('/insert_book', methods=['POST','GET'])
-def insert_book():
-    if request.method=="POST":            
+@book_bp.route('/insert_update_book/<string:id_data>', methods=['POST','GET'])
+def insert_update_book(id_data):
+    author_list=author_model.getall()           
+    if request.method=="POST":             
         title=request.form['title']
         isbn13=request.form['isbn13']
         qty=request.form['qty']
-        authorlist = request.form.getlist('author')
-        error = validate(title,isbn13,qty,authorlist)
+        author_selected_list = request.form.getlist('author')
+        
+        error = validate(title,isbn13,qty,author_selected_list,id_data)
         if error is None:
             try:        
-                flash(book_model.insert(title,isbn13,qty,authorlist))               
+                if id_data == '0':
+                    flash(book_model.insert(title,isbn13,qty,author_selected_list))       
+                else:
+                    flash(book_model.update(title,isbn13,qty,author_selected_list,id_data))       
+
                 return redirect(url_for('book_bp.book'))
             except Exception as error:
                 print(error)
                 return render_template('error_occured.html')
         else:
             flash(error)
-            return redirect(url_for('book_bp.book'))
-    else:
-        author_list=author_model.getall()
-        return render_template('add_update_book.html',res={"author_list": author_list, "product_list": author_list,"visible":True})
+            submit_type='Add'
+            if id_data != '0': submit_type='Update' 
+            print(author_list)
+            print(type(author_list))
+            print(author_selected_list)
+            print(type(author_selected_list))
+            return render_template('add_update_book.html', res={"id_data":id_data,"author_list": author_list, "author_selected_list": author_selected_list,
+                                    "submit_type":submit_type, "title":title,"isbn13":isbn13,"qty":qty})
+    else:         
+        author_selected_list = []    
+        submit_type='Add'
+        title=''
+        isbn13=''
+        qty=''
+        if id_data != '0': 
+            submit_type='Update' 
+            book_data, book_author=book_model.getbookbyid(id_data)
+            # print(book_data[1])
+            # author_selected_list=book_data[1]
+            author_selected_list=list(map(str,list(zip(*book_author))[0]))
+            # author_selected_list = list( map(str,book_author))
+            book_details= book_data[0]
+            print(book_details[0][0])
+            # print(author_list)
+            # print(author_selected_list)
+            print(author_list)
+            print(type(author_list))
+            print(author_selected_list)
+            print(type(author_selected_list))
+            # print(book_details[0])
+            title= book_details[0]
+            isbn13=book_details[1]
+            qty=book_details[2]
+
+        return render_template('add_update_book.html', res={"id_data":id_data,"author_list": author_list, "author_selected_list": author_selected_list,
+                                    "submit_type":submit_type, "title":title,"isbn13":isbn13,"qty":qty})
     
-
-
-@book_bp.route('/update_book',methods=['POST','GET'])
-def update_book():
-    if request.method=="POST":
-        id_data = request.form['id']            
-        name=request.form['name']
-        email=request.form['email']
-        phone=request.form['phone']
-        error = validate(name,email,phone)
-        if error is None:
-            try:        
-                flash(book_model.update(name,email,phone,id_data)) 
-                return redirect(url_for('book_bp.book'))
-            except Exception as error:
-                print(error)
-                return render_template('error_occured.html')
-        else:
-            flash(error)
-            return redirect(url_for('book_bp.book'))
-
-
-
 @book_bp.route('/delete_book/<string:id_data>', methods = ['GET'])
 def delete_book(id_data):
     try:
         flash(book_model.delete(id_data)) 
         return redirect(url_for('book_bp.book'))
     except Exception as error:
+        print(error)
         return render_template('error_occured.html')
     
 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 
-def validate(title,isbn13,qty,authorlist):    
+def validate(title,isbn13,qty,authorlist,id_data):    
     error = None
     if not title:
         error = "title is required."
@@ -90,4 +106,8 @@ def validate(title,isbn13,qty,authorlist):
         error = "quantity is required."
     elif not authorlist:
         error = "author is required."
+    elif not (book_model.check_duplicate_isbn(isbn13,id_data)) == 0:
+        error = "the isbn13 entered already exists in system."
+    print(error)
+        
     return error

@@ -1,6 +1,7 @@
 from app import mysql
 import app
 import re
+import urllib.request, json
 from flask import Blueprint,render_template, request, redirect, url_for, flash
 from models.book_model import book_model
 
@@ -19,6 +20,7 @@ def book():
         # cur.execute("SELECT * FROM member")
         # data = cur.fetchall()
         # cur.close()
+        
         data=book_model.getbookwithauthor()
         return render_template('book.html',book=data)
     except Exception as error:
@@ -94,6 +96,39 @@ def delete_book(id_data):
         print(error)
         return render_template('error_occured.html')
     
+@book_bp.route('/import_api_book', methods=['POST','GET'])
+def import_api_book():
+    if request.method=="POST":             
+        title=request.form['title']
+        count=request.form['count']
+      
+        #error = validate(title,count)
+        error=None
+        if error is None:
+            try:        
+                page='1'
+                url = "https://frappe.io/api/method/frappe-library?title="+title+"&page="+page
+                response = urllib.request.urlopen(url)
+                data = response.read()
+                dict = json.loads(data)
+                booklist=dict.get('message')
+                print(booklist)
+                print(type(booklist))
+               # flash(book_model.update(title,isbn13,qty,author_selected_list,id_data))    
+                return redirect(url_for('book_bp.book'))
+            except Exception as error:
+                print(error)
+                return render_template('error_occured.html')
+        else:
+            flash(error) 
+            return render_template('import_api_book.html',  res={"title":title,"count": count})
+
+    else:         
+        title=''
+        count=''              
+        return render_template('import_api_book.html', res={"title":title,"count": count})
+
+
 regex = r'\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Z|a-z]{2,7}\b'
 
 def validate(title,isbn13,qty,authorlist,id_data):    

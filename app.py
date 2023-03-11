@@ -33,6 +33,9 @@ app.register_blueprint(author_bp)
 from book import book_bp
 app.register_blueprint(book_bp)
 
+from setting import setting_bp
+app.register_blueprint(setting_bp)
+
 
 # @app.route('/member')
 # def member():

@@ -42,10 +42,17 @@ class book_model(BaseModel):
    def update(self,title,isbn13,qty,authorlist,id_data):
       cur=mysql.connection.cursor()
       cur.execute("UPDATE book SET title=%s, isbn13=%s, totalqty=%s  WHERE book_id=%s", (title, isbn13, qty, id_data))
-      format_strings = ','.join(['%s'] * len(authorlist))
-      qry="DELETE FROM book_auhor_trans where book_id=%s and "+"author_id NOT IN (%s)" % format_strings
-      print(qry)
-      cur.execute("DELETE FROM book_auhor_trans where book_id=%s and "+"author_id NOT IN (%s)" % format_strings, (id_data,authorlist))
+      sql = "DELETE FROM book_auhor_trans where book_id=%s and "+"author_id NOT IN (%s)"
+      in_ids = ', '.join(map(lambda x: '%s', authorlist))
+      print(in_ids)
+      sql = sql % ('%s', in_ids)
+      print(in_ids)
+      params = []
+      params.append(id_data)
+      params.extend(authorlist)
+      print(sql)
+      print(tuple(params))
+      cur.execute(sql, tuple(params))
       
       for author_id in authorlist:       
         cur.execute("INSERT INTO book_auhor_trans (book_id,author_id) SELECT %s,%s WHERE NOT EXISTS ( SELECT * FROM book_auhor_trans "+

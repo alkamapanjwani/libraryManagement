@@ -1,0 +1,70 @@
+{% extends 'index.html' %}
+
+{% block title %}Setting{% endblock %}
+
+{% block pagetitle %}Setting{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+          
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            {% for message in messages %}
+
+            <div class="alert alert-success alert-dismissable" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                    <span aria-hidden="true">x</wspan>
+                </button>
+                {{message}}
+            </div>
+
+
+            {%endfor%}
+            {%endif%}
+            {%endwith%}
+
+
+
+
+
+            <form action="{{ url_for('setting_bp.setting') }}" method="POST">
+
+
+                <div class="form-group">
+
+
+                    <label>Outstanding Debt:</label>
+                  
+                    <input type="number" class="form-control" name="outstanding_debt" value="{{res.outstanding_debt}}" required="1">
+
+
+                </div>
+
+
+
+
+                <div class="form-group">
+
+
+                    <button class="btn btn-primary" type="sbumit">Update</button>
+
+
+                </div>
+
+
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+
+
+
+</div>
+{% endblock %}

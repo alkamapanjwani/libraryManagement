@@ -4,11 +4,11 @@ import re
 import urllib.request, json
 from flask import Blueprint,render_template, request, redirect, url_for, flash
 from models.book_model import book_model
-
-book_model = book_model()
-
+from models.import_api_book_model import import_api_book_model
 from models.author_model import author_model
 
+book_model = book_model()
+import_api_book_model= import_api_book_model()
 author_model = author_model()
 
 book_bp = Blueprint('book_bp', __name__, url_prefix="/book")
@@ -105,16 +105,27 @@ def import_api_book():
         #error = validate(title,count)
         error=None
         if error is None:
-            try:        
-                page='1'
-                url = "https://frappe.io/api/method/frappe-library?title="+title+"&page="+page
-                response = urllib.request.urlopen(url)
-                data = response.read()
-                dict = json.loads(data)
-                booklist=dict.get('message')
-                print(booklist)
-                print(type(booklist))
-               # flash(book_model.update(title,isbn13,qty,author_selected_list,id_data))    
+            try:   
+                i=0  
+                page=1
+                booklist=[]
+                bookCnt=int(count)
+                while (i < bookCnt):                    
+                    url = "https://frappe.io/api/method/frappe-library?title="+title+"&page="+str(page)
+                    response = urllib.request.urlopen(url)
+                    data = response.read()
+                    dict = json.loads(data)
+                    curBookList=dict.get('message')
+                    if len(curBookList) > 0:
+                        booklist=booklist+curBookList
+                        i=len(booklist)
+                        page=page+1
+                    else: break
+                # print(booklist)
+                # print(type(booklist))
+                # print(i)
+
+                flash(import_api_book_model.insert(booklist,bookCnt))    
                 return redirect(url_for('book_bp.book'))
             except Exception as error:
                 print(error)

@@ -37,7 +37,10 @@ from setting import setting_bp
 app.register_blueprint(setting_bp)
 
 
-# @app.route('/member')
+from issue_return_book import issue_return_book_bp
+app.register_blueprint(issue_return_book_bp)
+
+# @app.route('/member') issue_return_book_model
 # def member():
 #     cur=mysql.connection.cursor()
 #     cur.execute("SELECT * FROM member")

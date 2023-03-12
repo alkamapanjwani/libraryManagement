@@ -13,6 +13,17 @@ class author_model(BaseModel):
       mysql.connection.commit()
       return "Data Inserted Successfully"
    
+   def insert_if_not_exists(self,name):
+      cur=mysql.connection.cursor()
+      cur.execute("SELECT author_id FROM author where name=%s", (name,))
+      row = cur.fetchone()
+      if row == None:
+         cur.execute("INSERT INTO author (name) VALUES (%s)", (name,))
+         author_id=cur.lastrowid
+      else: author_id = row[0]
+      mysql.connection.commit() 
+      return author_id
+
    def update(self,name,id_data):
       cur=mysql.connection.cursor()
       cur.execute("UPDATE author SET name=%s  WHERE author_id=%s", (name, id_data))

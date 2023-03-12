@@ -30,6 +30,7 @@ class book_model(BaseModel):
       #   data=[book_details,book_author]
         return book_details,book_author
 
+   
    def insert(self,title,isbn13,qty,authorlist):
       cur=mysql.connection.cursor()
       cur.execute("INSERT INTO book (title, isbn13, totalqty) VALUES (%s, %s, %s)",(title, isbn13, qty))
@@ -38,7 +39,7 @@ class book_model(BaseModel):
         cur.execute("INSERT INTO book_auhor_trans (book_id,author_id) VALUES (%s,%s)",(book_id,author_id))
       mysql.connection.commit()
       return "Data Inserted Successfully"
-   
+
    def update(self,title,isbn13,qty,authorlist,id_data):
       cur=mysql.connection.cursor()
       cur.execute("UPDATE book SET title=%s, isbn13=%s, totalqty=%s  WHERE book_id=%s", (title, isbn13, qty, id_data))
@@ -73,3 +74,10 @@ class book_model(BaseModel):
       isbn_count = cur.fetchone()[0]
       mysql.connection.commit()
       return isbn_count
+   
+   def update_qty_isbn13(self,isbn13):
+      cur=mysql.connection.cursor()
+      cur.execute("UPDATE book SET totalqty=totalqty+1 where isbn13=%s", (isbn13,))
+      update_count = cur.rowcount
+      mysql.connection.commit()
+      return update_count

@@ -38,6 +38,7 @@ class book_model(BaseModel):
       for author_id in authorlist:
         cur.execute("INSERT INTO book_auhor_trans (book_id,author_id) VALUES (%s,%s)",(book_id,author_id))
       mysql.connection.commit()
+      cur.close()
       return "Data Inserted Successfully"
 
    def update(self,title,isbn13,qty,authorlist,id_data):
@@ -59,6 +60,7 @@ class book_model(BaseModel):
         cur.execute("INSERT INTO book_auhor_trans (book_id,author_id) SELECT %s,%s WHERE NOT EXISTS ( SELECT * FROM book_auhor_trans "+
                     " WHERE book_id =%s AND author_id = %s)",(id_data,author_id,id_data,author_id))
       mysql.connection.commit()
+      cur.close()
       return "Data Updaeted Successfully"
   
    def delete(self,id_data):
@@ -66,6 +68,7 @@ class book_model(BaseModel):
       cur.execute("UPDATE book SET is_active_flag=0  WHERE book_id=%s", (id_data,))
       #cur.execute("DELETE FROM member WHERE member_id=%s", (id_data))
       mysql.connection.commit()
+      cur.close()
       return "Record Has Been Deleted Successfully"
    
    def check_duplicate_isbn(self,isbn13,id_data):
@@ -73,6 +76,7 @@ class book_model(BaseModel):
       cur.execute("SELECT COUNT(*) FROM book where isbn13=%s and book_id!=%s", (isbn13,id_data))
       isbn_count = cur.fetchone()[0]
       mysql.connection.commit()
+      cur.close()
       return isbn_count
    
    def update_qty_isbn13(self,isbn13):
@@ -80,4 +84,5 @@ class book_model(BaseModel):
       cur.execute("UPDATE book SET totalqty=totalqty+1 where isbn13=%s", (isbn13,))
       update_count = cur.rowcount
       mysql.connection.commit()
+      cur.close()
       return update_count

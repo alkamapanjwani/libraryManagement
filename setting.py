@@ -12,11 +12,12 @@ setting_bp = Blueprint('setting_bp', __name__, url_prefix="/setting")
 def setting():
     if request.method=="POST":       
         outstanding_debt=request.form['outstanding_debt']
+        book_fees=request.form['book_fees']
 
-        error = validate(outstanding_debt)
+        error = validate(outstanding_debt,book_fees)
         if error is None:
             try:        
-                flash(setting_model.update_outstanding_debt(outstanding_debt)) 
+                flash(setting_model.update(outstanding_debt,book_fees)) 
                 return redirect(url_for('setting_bp.setting'))
             except Exception as error:
                 print(error)
@@ -26,10 +27,13 @@ def setting():
             return redirect(url_for('setting_bp.setting'))
     else:
         data=setting_model.get_outstanding_debt()
-        return render_template('setting.html', res={"outstanding_debt":data})
+        book_fees=setting_model.get_book_fees()
+        return render_template('setting.html', res={"outstanding_debt":data,"book_fees":book_fees})
 
-def validate(outstanding_debt):    
+def validate(outstanding_debt,book_fees):    
     error = None
     if not outstanding_debt:
         error = "outstanding_debt is required."  
+    if not book_fees:
+        error = "book_fees is required."  
     return error

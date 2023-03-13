@@ -11,6 +11,7 @@ class author_model(BaseModel):
       cur=mysql.connection.cursor()
       cur.execute("INSERT INTO author (name) VALUES (%s)", (name,))
       mysql.connection.commit()
+      cur.close()
       return "Data Inserted Successfully"
    
    def insert_if_not_exists(self,name):
@@ -22,12 +23,14 @@ class author_model(BaseModel):
          author_id=cur.lastrowid
       else: author_id = row[0]
       mysql.connection.commit() 
+      cur.close()
       return author_id
 
    def update(self,name,id_data):
       cur=mysql.connection.cursor()
       cur.execute("UPDATE author SET name=%s  WHERE author_id=%s", (name, id_data))
       mysql.connection.commit()
+      cur.close()
       return "Data Updaeted Successfully"
   
    def delete(self,id_data):
@@ -35,4 +38,5 @@ class author_model(BaseModel):
       cur.execute("UPDATE author SET is_active_flag=0  WHERE author_id=%s", (id_data))
       #cur.execute("DELETE FROM member WHERE member_id=%s", (id_data))
       mysql.connection.commit()
+      cur.close()
       return "Record Has Been Deleted Successfully"

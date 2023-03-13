@@ -1,0 +1,179 @@
+{% extends 'index.html' %}
+
+{% block title %}Transaction{% endblock %}
+
+{% block pagetitle %}Transaction{% endblock %}
+
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+
+            <form action="{{ url_for('transaction_bp.transaction') }}" method="POST">
+
+                <div class="col-md-6">
+                    <select class="form-control" name="member" id="member" required="1">
+                        <option value="0">-- SELECT MEMBER--</option>
+                        {% for row in res.member %}
+                        <option value="{{row.0}}" {% if (( row.0 | string )==res.member_id) %} selected="selected" {%
+                            endif %}>{{row.1}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <button class="btn btn-primary" type="submit">Search</button>
+                    <!-- <button type="button" class="btn btn-success pull-left" data-toggle="modal" data-target="#myModal">
+                    Search</button> -->
+                    <button type="button" class="btn btn-success pull-right" data-toggle="modal" data-target="#myModal">
+                        Make Payment Entry</button>
+                </div>
+            </form>
+
+            <div class="col-md-12">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+
+                <div class="alert alert-success alert-dismissable" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="close">
+                        <span aria-hidden="true">x</wspan>
+                    </button>
+                    {{message}}
+                </div>
+
+
+                {%endfor%}
+                {%endif%}
+                {%endwith%}
+            </div>
+            <br/><br/>
+            <div class="col-md-12"></div>
+            <table class="table table-striped">
+                <tr>
+                    <th>Trans Id</th>
+                    <th>Trans DateTime</th>
+                    <th>Comment</th>
+                    <th>Dr Amount</th>
+                    <th>Cr Amount</th>
+                    <th>Amount Payable</th>
+
+                </tr>
+                <tbody id="myTable">
+                    {% for row in res.trans_list %}
+
+                    <tr>
+                        <td>{{ row.transaction_id }}</td>
+                        <td>{{row.date_inserted}}</td>
+                        <td>{{row.comment}}</td>
+                        <td>{{row.dr_amount}}</td>
+                        <td>{{row.cr_amount}}</td>
+                        <td>{{row.amount}}</td>
+
+                    </tr>
+
+                    {%endfor%}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+
+
+    <div class="modal-dialog">
+
+
+        <div class="modal-content">
+
+
+            <div class="modal-header">
+
+
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+
+                <h4 class="modal-title">Please Insert Data</h4>
+
+
+            </div>
+
+
+            <div class="modal-body">
+
+
+                <form action="{{ url_for('transaction_bp.payment_entry') }}" method="POST">
+
+
+                    <div class="form-group">
+
+
+                        <label>Member:</label>
+                        <select class="form-control" name="member" id="member" required="1">
+                            {% for row in res.member %}
+                            <option value="{{row.0}}">{{row.1}}</option>
+                            {%endfor%}
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+
+                        <label>Amount:</label>
+                        <input type="number" class="form-control" name="amount" required="1">
+
+                    </div>
+
+                    <div class="form-group">
+
+
+                        <label>Comment:</label>
+                        <input type="text" class="form-control" name="comment" required="1">
+
+                    </div>
+
+
+
+
+
+                    <div class="form-group">
+
+
+                        <button class="btn btn-primary" type="submit">Submit</button>
+
+
+                    </div>
+
+
+                </form>
+
+
+            </div>
+
+
+            <div class="modal-footer">
+
+
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+</div>
+
+
+
+{% endblock %}

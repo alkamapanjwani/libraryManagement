@@ -36,10 +36,11 @@ app.register_blueprint(book_bp)
 from setting import setting_bp
 app.register_blueprint(setting_bp)
 
-
 from issue_return_book import issue_return_book_bp
 app.register_blueprint(issue_return_book_bp)
 
+from transaction import transaction_bp
+app.register_blueprint(transaction_bp)
 # @app.route('/member') issue_return_book_model
 # def member():
 #     cur=mysql.connection.cursor()

@@ -6,10 +6,14 @@ from flask import Blueprint,render_template, request, redirect, url_for, flash
 from models.issue_return_book_model import issue_return_book_model
 from models.book_model import book_model
 from models.member_model import member_model
+from models.setting_model import Setting_model
+from models.transaction_model import transaction_model
 
 issue_return_book_model = issue_return_book_model()
 book_model = book_model()
 member_model = member_model()
+setting_model = Setting_model()
+transaction_model = transaction_model()
 
 issue_return_book_bp = Blueprint('issue_return_book_bp', __name__, url_prefix="/issue_return_book")
 
@@ -65,4 +69,6 @@ def validate(member_id,book_id):
         error = "member is required."
     elif not book_id:
         error = "book is required."  
+    elif transaction_model.get_amount_payable_member(member_id) >= setting_model.get_outstanding_debt() :
+        error = "please clear outstanding debt first before new issue"
     return error

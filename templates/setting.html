@@ -9,7 +9,7 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-          
+
             {% with messages = get_flashed_messages() %}
             {% if messages %}
             {% for message in messages %}
@@ -33,24 +33,38 @@
             <form action="{{ url_for('setting_bp.setting') }}" method="POST">
 
 
-                <div class="form-group">
 
+                <div class="col-md-12">
+                    <div class="form-group">
 
-                    <label>Outstanding Debt:</label>
-                  
-                    <input type="number" class="form-control" name="outstanding_debt" value="{{res.outstanding_debt}}" required="1">
+                        <label>Outstanding Debt:</label>
 
+                        <input type="number" class="form-control" name="outstanding_debt"
+                            value="{{res.outstanding_debt}}" required="1">
+                    </div>
+                </div>
 
+                <div class="col-md-12">
+                    <div class="form-group">
+
+                        <label>Book Fees:</label>
+
+                        <input type="number" class="form-control" name="book_fees" value="{{res.book_fees}}"
+                            required="1">
+                    </div>
                 </div>
 
 
 
 
+                <div class="col-md-12">
+
                 <div class="form-group">
 
 
-                    <button class="btn btn-primary" type="sbumit">Update</button>
+                    <button class="btn btn-primary" type="submit">Update</button>
 
+                </div>
 
                 </div>
 

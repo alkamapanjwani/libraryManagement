@@ -74,9 +74,10 @@ To run this project on your local machine, follow the steps below:
 ## **Screenshots**
 
 ### Landing Page
-Currently it is working on all NSE (India) Stocks, BSE (India) Stocks Symbol will be added soon.
+![](images_readme/landing.PNG)
 
-![](https://iharsh234.github.io/WebApp/images/demo/web_app_face.JPG)
+### Member Liat
+![](images_readme/member_list.PNG)
 
 ## **To Do**
 
@@ -88,5 +89,5 @@ The following are proposed enhancements:
 * Async calls to avoid reloading
 * Pagination
 * Better UI/ UX
-* Additional checks such as maximum number of books that can be issued to a member simultaneously, late return , etc.
+* Additional checks such as maximum number of books that can be issued to a member simultaneously, late return, etc.
 

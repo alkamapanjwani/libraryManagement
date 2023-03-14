@@ -120,7 +120,7 @@ To run this project on your local machine, follow the steps below:
 ![](images_readme/transaction_payment.PNG)
 
 ### Setting
-![](images_readme/settng.PNG)
+![](images_readme/setting.PNG)
 
 ## **To Do**
 

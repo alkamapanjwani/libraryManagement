@@ -29,7 +29,7 @@ class member_model(BaseModel):
 
     def delete(self, id_data):
         cur = mysql.connection.cursor()
-        cur.execute("UPDATE member SET is_active_flag=0  WHERE member_id=%s", (id_data))
+        cur.execute("UPDATE member SET is_active_flag=0  WHERE member_id=%s", (id_data,))
         # cur.execute("DELETE FROM member WHERE member_id=%s", (id_data))
         mysql.connection.commit()
         cur.close()

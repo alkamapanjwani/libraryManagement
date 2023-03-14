@@ -10,7 +10,7 @@ class book_model(BaseModel):
   
    def getbookwithauthor(self):
         cur=mysql.connection.cursor()
-        cur.execute("SELECT b.book_id, b.title, GROUP_CONCAT(a.name SEPARATOR '/ ') as author, b.isbn13, b.totalqty FROM library_db.book b inner join book_auhor_trans bat "+
+        cur.execute("SELECT b.book_id, b.title, GROUP_CONCAT(a.name SEPARATOR '/ ') as author, b.isbn13, b.totalqty FROM book b inner join book_auhor_trans bat "+
 "on b.book_id=bat.book_id  "+
 "inner join author a on a.author_id=bat.author_id  "+
 "where b.is_active_flag=1 "+
@@ -21,7 +21,7 @@ class book_model(BaseModel):
    
    def getbookbyid(self,id_data):
         cur=mysql.connection.cursor()
-        cur.execute("SELECT b.title, b.isbn13, b.totalqty FROM library_db.book b where b.book_id=%s",(id_data,))
+        cur.execute("SELECT b.title, b.isbn13, b.totalqty FROM book b where b.book_id=%s",(id_data,))
         book_details = cur.fetchall() 
         cur.execute("SELECT a.author_id FROM library_db.book_auhor_trans b inner join author a on a.author_id=b.author_id "+
                      " where b.book_id=%s",(id_data,))

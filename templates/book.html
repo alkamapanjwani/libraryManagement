@@ -9,10 +9,11 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2>Book List 
+            <h2>Book List
                 <span class="pull-right">
-                <a href="{{ url_for('book_bp.insert_update_book',id_data='0') }}" class="btn btn-success" >Add Book Data</a>
-                <a href="{{ url_for('book_bp.import_api_book') }}" class="btn btn-success " >Import Books</a>
+                    <a href="{{ url_for('book_bp.insert_update_book',id_data='0') }}" class="btn btn-primary">Add Book
+                        Data</a>
+                    <a href="{{ url_for('book_bp.import_api_book') }}" class="btn btn-primary ">Import Books</a>
                 </span>
             </h2>
 
@@ -31,7 +32,7 @@
             {%endfor%}
             {%endif%}
             {%endwith%}
-            <p>Type something in the input field to search the table:</p>  
+            <p>Type something in the input field to search the table:</p>
             <input class="form-control" id="myInput" type="text" placeholder="Search..">
             <br>
             <table class="table table-striped">
@@ -43,25 +44,26 @@
                     <th>Total Qty</th>
                     <th>Action</th>
                 </tr>
-<tbody id="myTable">
-                {% for row in book %}
+                <tbody id="myTable">
+                    {% for row in book %}
 
-                <tr>
-                    <td>{{row.0}}</td>
-                    <td>{{row.1}}</td>
-                    <td>{{row.2}}</td>
-                    <td>{{row.3}}</td>
-                    <td>{{row.4}}</td>
+                    <tr>
+                        <td>{{row.0}}</td>
+                        <td>{{row.1}}</td>
+                        <td>{{row.2}}</td>
+                        <td>{{row.3}}</td>
+                        <td>{{row.4}}</td>
 
-                    <td>
-                        <a href="{{ url_for('book_bp.insert_update_book',id_data=row.0) }}" class="btn btn-warning btn-xs" data-toggle="modal">Edit</a>
-                        <a href="{{ url_for('book_bp.delete_book',id_data=row.0) }}" class="btn btn-danger btn-xs"
-                            onclick="return confirm('Are You Sure For Delete?')">Delete</a>
-                    </td>
-                </tr>
+                        <td>
+                            <a href="{{ url_for('book_bp.insert_update_book',id_data=row.0) }}"
+                                class="btn btn-info btn-xs" data-toggle="modal">Edit</a>
+                            <a href="{{ url_for('book_bp.delete_book',id_data=row.0) }}" class="btn btn-danger btn-xs"
+                                onclick="return confirm('Are You Sure For Delete?')">Delete</a>
+                        </td>
+                    </tr>
 
-                {%endfor%}
-            </tbody>
+                    {%endfor%}
+                </tbody>
             </table>
 
         </div>
@@ -70,13 +72,13 @@
 </div>
 
 <script>
-    $(document).ready(function(){
-      $("#myInput").on("keyup", function() {
-        var value = $(this).val().toLowerCase();
-        $("#myTable tr").filter(function() {
-          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    $(document).ready(function () {
+        $("#myInput").on("keyup", function () {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function () {
+                $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
         });
-      });
     });
 </script>
 

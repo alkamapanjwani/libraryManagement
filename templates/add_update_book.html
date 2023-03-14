@@ -45,7 +45,7 @@
 
 
                     <label>Isbn 13:</label>
-                    <input type="text" class="form-control"  value="{{ res.isbn13 }}" name="isbn13" required="1">
+                    <input type="text" class="form-control" value="{{ res.isbn13 }}" name="isbn13" required="1">
 
 
                 </div>
@@ -64,9 +64,10 @@
 
 
                     <label>Author:</label>
-                    <select class="form-control"  name="author" id="author" multiple required="1">
+                    <select class="form-control" name="author" id="author" multiple required="1">
                         {% for row in res.author_list %}
-                        <option value="{{row.0}}" {% if ( row.0 | string ) in res.author_selected_list %} selected="selected" {% endif %} >{{row.1}}</option>                       
+                        <option value="{{row.0}}" {% if ( row.0 | string ) in res.author_selected_list %}
+                            selected="selected" {% endif %}>{{row.1}}</option>
                         {%endfor%}
                     </select>
 

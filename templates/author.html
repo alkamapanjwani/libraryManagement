@@ -5,11 +5,11 @@
 {% block pagetitle %}Author{% endblock %}
 
 {% block body %}
-  
+
 <div class="container">
    <div class="row">
       <div class="col-md-12">
-         <h2>Author List <button type="button" class="btn btn-success pull-right" data-toggle="modal"
+         <h2>Author List <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
                data-target="#myModal">
                Add Author Data</button></h2>
 
@@ -40,9 +40,9 @@
 
             <tr>
                <td>{{row.0}}</td>
-               <td>{{row.1}}</td>             
+               <td>{{row.1}}</td>
                <td>
-                  <a href="/update/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal"
+                  <a href="/update/{{row.0}}" class="btn btn-info btn-xs" data-toggle="modal"
                      data-target="#modaledit{{row.0}}">Edit</a>
                   <a href="{{ url_for('author_bp.delete_author',id_data=row.0) }}" class="btn btn-danger btn-xs"
                      onclick="return confirm('Are You Sure For Delete?')">Delete</a>
@@ -93,7 +93,7 @@
                            <div class="form-group">
 
 
-                              <button class="btn btn-primary" type="sbumit">Update</button>
+                              <button class="btn btn-primary" type="submit">Update</button>
 
 
                            </div>
@@ -104,14 +104,14 @@
 
                      </div>
 
-
+                     <!-- 
                      <div class="modal-footer">
 
 
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 
-                     </div>
+                     </div> -->
 
 
                   </div>
@@ -184,14 +184,14 @@
 
             </div>
 
-
+            <!-- 
             <div class="modal-footer">
 
 
                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 
-            </div>
+            </div> -->
 
 
          </div>

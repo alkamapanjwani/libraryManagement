@@ -5,11 +5,11 @@
 {% block pagetitle %}Member{% endblock %}
 
 {% block body %}
-  
+
 <div class="container">
    <div class="row">
       <div class="col-md-12">
-         <h2>Member List <button type="button" class="btn btn-success pull-right" data-toggle="modal"
+         <h2>Member List <button type="button" class="btn btn-primary pull-right" data-toggle="modal"
                data-target="#myModal">
                Add Member Data</button></h2>
 
@@ -46,7 +46,7 @@
                <td>{{row.2}}</td>
                <td>{{row.3}}</td>
                <td>
-                  <a href="/update/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal"
+                  <a href="/update/{{row.0}}" class="btn btn-info btn-xs" data-toggle="modal"
                      data-target="#modaledit{{row.0}}">Edit</a>
                   <a href="{{ url_for('member_bp.delete_member',id_data=row.0) }}" class="btn btn-danger btn-xs"
                      onclick="return confirm('Are You Sure For Delete?')">Delete</a>
@@ -118,7 +118,7 @@
                            <div class="form-group">
 
 
-                              <button class="btn btn-primary" type="sbumit">Update</button>
+                              <button class="btn btn-primary" type="submit">Update</button>
 
 
                            </div>
@@ -130,13 +130,13 @@
                      </div>
 
 
-                     <div class="modal-footer">
+                     <!-- <div class="modal-footer">
 
 
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 
-                     </div>
+                     </div> -->
 
 
                   </div>
@@ -231,13 +231,13 @@
             </div>
 
 
-            <div class="modal-footer">
+            <!-- <div class="modal-footer">
 
 
                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 
-            </div>
+            </div> -->
 
 
          </div>

@@ -9,9 +9,9 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h2>Issued Book List<button type="button" class="btn btn-success pull-right" data-toggle="modal"
+            <h2>Issued Book List<button type="button" class="btn btn-primary pull-right" data-toggle="modal"
                     data-target="#myModal">
-                   Issue Book</button>
+                    Issue Book</button>
 
             </h2>
 
@@ -52,11 +52,11 @@
                         <td>{{row.2}}</td>
                         <td>{{row.3}}</td>
                         <td>{{row.4}}</td>
-                        <td>{% if row.6 == 'yes' %} {{row.5}}  {% endif %}</td>
+                        <td>{% if row.6 == 'yes' %} {{row.5}} {% endif %}</td>
                         <td>
                             {% if row.6 == 'no' %}
                             <a href="{{ url_for('issue_return_book_bp.return_book',id_data=row.0) }}"
-                                class="btn btn-warning btn-xs"
+                                class="btn btn-info btn-xs"
                                 onclick="return confirm('Are You Sure You Want To Mark Book As Returned?')">Mark As
                                 Returned</a>
                             {% endif %}
@@ -103,7 +103,7 @@
                             <label>Member:</label>
                             <select class="form-control" name="member" id="member" required="1">
                                 {% for row in res.member %}
-                                <option value="{{row.0}}" >{{row.1}}</option>
+                                <option value="{{row.0}}">{{row.1}}</option>
                                 {%endfor%}
                             </select>
 
@@ -116,14 +116,14 @@
                             <label>Book:</label>
                             <select class="form-control" name="book" id="book" required="1">
                                 {% for row in res.book %}
-                                <option value="{{row.0}}" >{{row.1}}</option>
+                                <option value="{{row.0}}">{{row.1}}</option>
                                 {%endfor%}
                             </select>
 
                         </div>
 
 
-                       
+
 
 
 
@@ -142,14 +142,14 @@
                 </div>
 
 
-                <div class="modal-footer">
+                <!-- <div class="modal-footer">
 
 
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
 
                 </div>
-
+ -->
 
             </div>
 

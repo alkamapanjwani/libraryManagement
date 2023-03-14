@@ -68,6 +68,7 @@ def delete_member(id_data):
         flash(member_model.delete(id_data))
         return redirect(url_for("member_bp.member"))
     except Exception as error:
+        print(error)
         return render_template("error_occured.html")
 
 

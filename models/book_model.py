@@ -82,7 +82,7 @@ class book_model(BaseModel):
             )
         mysql.connection.commit()
         cur.close()
-        return "Data Updaeted Successfully"
+        return "Data Updated Successfully"
 
     def delete(self, id_data):
         cur = mysql.connection.cursor()

@@ -32,7 +32,7 @@ class author_model(BaseModel):
         cur.execute("UPDATE author SET name=%s  WHERE author_id=%s", (name, id_data))
         mysql.connection.commit()
         cur.close()
-        return "Data Updaeted Successfully"
+        return "Data Updated Successfully"
 
     def delete(self, id_data):
         cur = mysql.connection.cursor()

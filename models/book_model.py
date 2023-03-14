@@ -23,7 +23,7 @@ class book_model(BaseModel):
         cur=mysql.connection.cursor()
         cur.execute("SELECT b.title, b.isbn13, b.totalqty FROM book b where b.book_id=%s",(id_data,))
         book_details = cur.fetchall() 
-        cur.execute("SELECT a.author_id FROM library_db.book_auhor_trans b inner join author a on a.author_id=b.author_id "+
+        cur.execute("SELECT a.author_id FROM book_auhor_trans b inner join author a on a.author_id=b.author_id "+
                      " where b.book_id=%s",(id_data,))
         book_author = cur.fetchall() 
         cur.close()

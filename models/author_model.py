@@ -36,7 +36,7 @@ class author_model(BaseModel):
 
     def delete(self, id_data):
         cur = mysql.connection.cursor()
-        cur.execute("UPDATE author SET is_active_flag=0  WHERE author_id=%s", (id_data))
+        cur.execute("UPDATE author SET is_active_flag=0  WHERE author_id=%s", (id_data,))
         # cur.execute("DELETE FROM member WHERE member_id=%s", (id_data))
         mysql.connection.commit()
         cur.close()

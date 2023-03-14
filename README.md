@@ -76,8 +76,51 @@ To run this project on your local machine, follow the steps below:
 ### Landing Page
 ![](images_readme/landing.PNG)
 
-### Member Liat
+### Member List
 ![](images_readme/member_list.PNG)
+
+### Member Add
+![](images_readme/member_add.PNG)
+
+### Member Edit
+![](images_readme/member_edit.PNG)
+
+### Author List
+![](images_readme/author_list.PNG)
+
+### Author Add
+![](images_readme/author_add.PNG)
+
+### Author Edit
+![](images_readme/author_edit.PNG)
+
+### Book List
+![](images_readme/book_list.PNG)
+
+### Book Add/ Update
+![](images_readme/book_add_update.PNG)
+
+### Import Book from API
+![](images_readme/book_import.PNG)
+
+### Issue/ Return Book List
+![](images_readme/issue_return_list.PNG)
+
+### Issue Book
+![](images_readme/issue_book.PNG)
+
+### Return Book
+![](images_readme/return_book.PNG)
+![](images_readme/return_book_msg.PNG)
+
+### Transaction List
+![](images_readme/transaction_list.PNG)
+
+### Transaction Payment Entry
+![](images_readme/transaction_payment.PNG)
+
+### Setting
+![](images_readme/settng.PNG)
 
 ## **To Do**
 
